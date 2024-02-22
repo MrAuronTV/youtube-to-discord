@@ -8,7 +8,9 @@ from json import loads
 import urllib.request
 
 WEBHOOK_URL = 'YOUR_WEBHOOK_URL' # Discord webhook url
-PATH = 'YOUR_PATH' #Path where you stock clip id for doesnt spam discord
+PATH = 'YOUR_PATH' #Path where you stock video id for doesnt spam discord
+PLAYLISTID= 'PLAYLIST_ID' # Youtube playlist ID
+TOKEN = 'YOUTUBE API TOKEN' #TOKEN API
 
 try:
     id = pickle.load(open("{}/lastvideo".format(PATH), "rb"))
@@ -17,7 +19,7 @@ except (OSError, IOError) as e:
     pickle.dump(foo, open("{}/lastvideo".format(PATH), "wb"))
 
 
-API_ENDPOINT = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=<PLAYLIST ID>&key=<YOUTUBE API TOKEN>&maxResults=1'
+API_ENDPOINT = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId={0}&key={1}&maxResults=1'.format(PLAYLISTID,TOKEN)
 
 #api call here
 r = requests.get(url = API_ENDPOINT)
